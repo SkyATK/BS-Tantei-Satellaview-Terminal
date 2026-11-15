@@ -31,13 +31,13 @@ import tkinter.font as tkfont
 
 LANG_DEFAULT = "zh"
 LANG_CODES = ("zh", "en")
-LANG_LABELS = {"zh": "中文", "en": "English"}
+LANG_LABELS = {"zh": "简体中文", "en": "English"}
 _TEXTS = {
     "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.0",
                   "en": "Satellaview Terminal · BS Tantei Club 1.0"},
     "ui.clock_title": {"zh": "虚拟广播时钟", "en": "Broadcast clock"},
     "ui.chapter_label": {"zh": "推送篇章：", "en": "Chapter:"},
-    "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Show monitor panel / advanced"},
+    "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Monitor panel / Advanced settings"},
     "ui.lang_label": {"zh": "语言", "en": "Language"},
     "lbl.mesen": {"zh": "Mesen", "en": "Mesen"},
     "lbl.bios": {"zh": "BIOS", "en": "BIOS"},
@@ -2660,11 +2660,11 @@ def _selftest():
     chk("前篇无 lua 提示", "Lua脚本" not in app._get_state()["status"],
         app._get_state()["status"].replace("\n", " / "))
 
-    print("== 多语言（中文 / English）==")
+    print("== 多语言（简体中文 / English）==")
     chk("每条文案双语齐全", all(all(str(v.get(c, "")).strip() for c in LANG_CODES)
                           for v in _TEXTS.values()),
         f"{len(_TEXTS)} 条 × {len(LANG_CODES)} 语")
-    chk("语言选项用母语写", [LANG_LABELS[c] for c in LANG_CODES] == ["中文", "English"])
+    chk("语言选项用母语写", [LANG_LABELS[c] for c in LANG_CODES] == ["简体中文", "English"])
     _has_kana = lambda s: any(0x3040 <= ord(c) <= 0x30FF for c in s)
     _has_han = lambda s: any(0x4E00 <= ord(c) <= 0x9FFF for c in s)
     chk("英文条目里没有中日文字符",
@@ -2674,7 +2674,7 @@ def _selftest():
         not any(_has_kana(v["zh"]) for v in _TEXTS.values()),
         str([k for k, v in _TEXTS.items() if _has_kana(v["zh"])])[:120])
     chk("缺 key 不抛异常（退回 key 本身）", tr("__no_such_key__") == "__no_such_key__")
-    chk("默认语言是中文", current_lang() == "zh")
+    chk("默认语言是简体中文", current_lang() == "zh")
 
     app.select_chapter(2)
     app.boot_var.set("60")
@@ -2704,10 +2704,10 @@ def _selftest():
 
     app._pick_lang("zh")
     app.root.update()
-    chk("切回中文：主按钮复原", app.btn_main.cget("text") == zh_main, app.btn_main.cget("text"))
-    chk("切回中文：状态行复原", app._get_state()["status"] == zh_status,
+    chk("切回简体中文：主按钮复原", app.btn_main.cget("text") == zh_main, app.btn_main.cget("text"))
+    chk("切回简体中文：状态行复原", app._get_state()["status"] == zh_status,
         app._get_state()["status"].replace("\n", " / "))
-    chk("切回中文：面板标签复原", "音频" in [w.cget("text") for w, _k, _f in app._i18n_widgets])
+    chk("切回简体中文：面板标签复原", "音频" in [w.cget("text") for w, _k, _f in app._i18n_widgets])
     app.running = True
     app._pick_lang("en")
     chk("播放中不许切语言", current_lang() == "zh" and app.lang_var.get() == "zh",
