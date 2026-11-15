@@ -33,7 +33,7 @@ A third-party companion tool built on top of [BS-Zelda-Satellaview-Terminal](htt
    * `Mesen.exe` in the same folder is detected automatically. The resolved Mesen / BIOS paths are shown as two read-only fields (`Mesen` / `BIOS`) under "Monitor panel / Advanced settings".
    * Replacing the BIOS overwrites the local copy; if the file already exists, a confirmation dialog appears first.
    * Choose the chapter to broadcast: **Zenhen / Chuuhen / Kouhen**.
-   * 中文 / English can be switched at the bottom-right of "Monitor panel / Advanced settings".
+   * 简体中文 / English can be switched at the bottom-right of "Monitor panel / Advanced settings".
    * Press the step-3 button: the program launches Mesen itself (Chuuhen also loads the Lua script). When the clock reaches **18:00:00** the broadcast is pushed and the audio starts.
 
 4. **Notes**
