@@ -460,7 +460,7 @@ CFG_PATH = os.path.join(APP_DIR, "data", "tantei_terminal.json")
 CFG_PATH_LEGACY = os.path.join(ROOT, "_generated", "config", "tantei_terminal.json")
 LUA_SCENE_MUTE = os.path.join(APP_DIR, "bs.lua")
 LUA_SCENE_MUTE_LEGACY = os.path.join(ROOT, "_generated", "scripts", "lua", "scene_mute.lua")
-LOGO_PNG = _res_file("ui", "logo.png")
+LOGO_PNG = _res_file("ui", "icon.png")
 ICON_SIZES = (16, 20, 24, 32, 40, 48, 64, 96, 128, 256)
 FONT_CANDIDATES = [
     _res_file("fonts", "SourceHanSansHC-Normal.otf"),
@@ -679,7 +679,7 @@ def build_logo_canvases(sizes=ICON_SIZES):
 
 def load_logo_images(master):
     if not os.path.exists(LOGO_PNG):
-        return [], "缺少 logo.png"
+        return [], "缺少 icon.png"
     try:
         from PIL import ImageTk
     except ImportError:
@@ -692,7 +692,7 @@ def load_logo_images(master):
     try:
         canvases = build_logo_canvases()
         imgs = [ImageTk.PhotoImage(im, master=master) for _, im in canvases]
-        return imgs, f"logo.png -> {len(imgs)} 档"
+        return imgs, f"icon.png -> {len(imgs)} 档"
     except Exception as exc:
         return [], f"PIL 处理失败: {exc}"
 
