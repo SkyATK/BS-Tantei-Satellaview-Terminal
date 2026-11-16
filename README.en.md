@@ -1,4 +1,4 @@
-# BS Tantei Club Broadcast Terminal
+# BS Tantei Club Satellaview Terminal
 
 <p align="center">
   <a href="README.md">简体中文</a> · <b>English</b>
