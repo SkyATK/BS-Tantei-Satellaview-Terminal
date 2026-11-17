@@ -4,7 +4,7 @@
   <a href="README.md">简体中文</a> · <b>English</b>
 </p>
 
-A third-party companion tool built on top of [BS-Zelda-Satellaview-Terminal](https://github.com/kiriqaq/BS-Zelda-Satellaview-Terminal), made specifically for the **YinHeZhanShi Tieba community's Chinese translation of *BS Tantei Club: Yuki ni Kieta Kako***. It does the same job as the original project: through Python it drives the Mesen emulator and, at the instant the virtual clock reaches 18:00, drops the broadcast data into the emulator's `Satellaview/` folder while starting the matching `.wav` Satellaview audio track — reproducing the real-time, synchronized Satellaview broadcast of the original game.
+A third-party companion tool built on top of [BS-Zelda-Satellaview-Terminal](https://github.com/kiriqaq/BS-Zelda-Satellaview-Terminal), made specifically for the **YinHeZhanShi Tieba community's Chinese translation of *BS Tantei Club: Yuki ni Kieta Kako***. It does the same job as the original project: through Python it drives the Mesen emulator and, at the instant the virtual clock reaches 18:00, drops the broadcast data into the emulator's `Satellaview/` folder while starting the matching `.wav` broadcast track — reproducing the real-time, synchronized Satellaview broadcast of the original game.
 
 *BS Tantei Club: Yuki ni Kieta Kako* is a SoundLink-only title. Compared with *BS The Legend of Zelda* it no longer has a "video overlay" or a "results screen", but the chuuhen chapter does contain in-game music scenes, which still need an extra Lua script to catch.
 
