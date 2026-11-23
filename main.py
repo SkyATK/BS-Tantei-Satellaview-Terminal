@@ -32,8 +32,8 @@ LANG_DEFAULT = "zh"
 LANG_CODES = ("zh", "en")
 LANG_LABELS = {"zh": "简体中文", "en": "English"}
 _TEXTS = {
-    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.0",
-                  "en": "Satellaview Terminal · BS Tantei Club 1.0"},
+    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.01",
+                  "en": "Satellaview Terminal · BS Tantei Club 1.01"},
     "ui.clock_title": {"zh": "虚拟广播时钟", "en": "Broadcast clock"},
     "ui.chapter_label": {"zh": "推送篇章：", "en": "Chapter:"},
     "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Monitor panel / Advanced settings"},
@@ -149,6 +149,10 @@ _TEXTS = {
                            "en": "No save file found — nothing to delete."},
     "dlg.save_del_fail": {"zh": "无法删除存档：{e}\n请先关闭 Mesen。",
                           "en": "Cannot delete the save: {e}\nClose Mesen first."},
+    "dlg.save_del_running": {"zh": "检测到 Mesen 仍在运行，存档没有删除。\n"
+                                   "请先关闭 Mesen 窗口，再点「删除存档」。",
+                             "en": "Mesen is still running — the save was NOT deleted.\n"
+                                   "Close Mesen first, then click Delete save data again."},
     "log.mesen_selected": {"zh": "[模拟器] {path}", "en": "[Emulator] {path}"},
     "log.mesen_auto": {"zh": "[模拟器] 自动识别 {path}", "en": "[Emulator] auto-detected {path}"},
     "log.ini_loaded": {"zh": "[配置] 已读取 {path}", "en": "[Config] loaded {path}"},
@@ -259,6 +263,8 @@ _TEXTS = {
                            "en": "[System] bs.lua window closed → Mesen closed, back to start"},
     "log.auto_reset": {"zh": "[系统] 播放结束 → 回到初始状态", "en": "[System] playback finished → back to start"},
     "log.save_deleted": {"zh": "[存档] 已删除 {path}", "en": "[Save] deleted {path}"},
+    "log.save_del_blocked": {"zh": "[存档] 检测到 Mesen 仍在运行 → 已拦截，未删除存档",
+                             "en": "[Save] Mesen still running → blocked, save not deleted"},
     "log.error": {"zh": "[错误] {e}", "en": "[Error] {e}"},
     "log.close_fail": {"zh": "[关闭] 请求关闭 Mesen 失败：{e}", "en": "[Close] closing Mesen failed: {e}"},
     "log.closed": {"zh": "[关闭] 已关闭 Mesen。", "en": "[Close] Mesen closed."},
@@ -508,6 +514,78 @@ def rel(p, root=None):
         return os.path.relpath(p, root or ROOT)
     except ValueError:
         return p
+
+TH32CS_SNAPPROCESS = 0x00000002
+PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+INVALID_HANDLE = ctypes.c_void_p(-1).value
+
+class PROCESSENTRY32W(ctypes.Structure):
+    _fields_ = [("dwSize", ctypes.c_ulong),
+                ("cntUsage", ctypes.c_ulong),
+                ("th32ProcessID", ctypes.c_ulong),
+                ("th32DefaultHeapID", ctypes.c_void_p),
+                ("th32ModuleID", ctypes.c_ulong),
+                ("cntThreads", ctypes.c_ulong),
+                ("th32ParentProcessID", ctypes.c_ulong),
+                ("pcPriClassBase", ctypes.c_long),
+                ("dwFlags", ctypes.c_ulong),
+                ("szExeFile", ctypes.c_wchar * 260)]
+
+def _kernel32():
+    try:
+        return ctypes.windll.kernel32
+    except (AttributeError, OSError):
+        return None
+
+def proc_pids(name):
+    """按进程名（如 Mesen.exe）列出 PID；枚举失败（非 Windows / 无权限）返回 None。"""
+    k32 = _kernel32()
+    if k32 is None:
+        return None
+    try:
+        k32.CreateToolhelp32Snapshot.restype = ctypes.c_void_p
+        k32.CreateToolhelp32Snapshot.argtypes = (ctypes.c_ulong, ctypes.c_ulong)
+    except AttributeError:
+        return None
+    snap = k32.CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
+    if not snap or snap == INVALID_HANDLE:
+        return None
+    entry = PROCESSENTRY32W()
+    entry.dwSize = ctypes.sizeof(entry)
+    pids = []
+    try:
+        ok = k32.Process32FirstW(ctypes.c_void_p(snap), ctypes.byref(entry))
+        while ok:
+            if (entry.szExeFile or "").lower() == str(name).lower():
+                pids.append(int(entry.th32ProcessID))
+            entry.dwSize = ctypes.sizeof(entry)
+            ok = k32.Process32NextW(ctypes.c_void_p(snap), ctypes.byref(entry))
+    finally:
+        k32.CloseHandle(ctypes.c_void_p(snap))
+    return pids
+
+def proc_exe_path(pid):
+    """取进程可执行文件的全路径；拿不到（权限 / 进程已退出）返回 ""。"""
+    k32 = _kernel32()
+    if k32 is None:
+        return ""
+    try:
+        k32.OpenProcess.restype = ctypes.c_void_p
+        k32.OpenProcess.argtypes = (ctypes.c_ulong, ctypes.c_int, ctypes.c_ulong)
+    except AttributeError:
+        return ""
+    h = k32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, 0, int(pid))
+    if not h:
+        return ""
+    try:
+        buf = ctypes.create_unicode_buffer(1024)
+        size = ctypes.c_ulong(len(buf))
+        if not k32.QueryFullProcessImageNameW(ctypes.c_void_p(h), 0, buf,
+                                             ctypes.byref(size)):
+            return ""
+        return buf.value or ""
+    finally:
+        k32.CloseHandle(ctypes.c_void_p(h))
 
 class LuaWindowWatcher:
 
@@ -2182,8 +2260,31 @@ class TanteiTerminal:
         self._refresh_env_line()
         self.root.after(400, lambda: self.btn_main.config(state="normal"))
 
+    def _mesen_running(self):
+        """Mesen 是否还开着：先看本终端启动的进程，再枚举同名进程核对目录。"""
+        proc = getattr(self, "proc", None)
+        if proc is not None and proc.poll() is None:
+            return True
+        pids = proc_pids("Mesen.exe")
+        if not pids:
+            return False
+        want = ""
+        if self.mesen_dir:
+            want = os.path.normcase(os.path.abspath(self.mesen_dir))
+        for pid in pids:
+            exe = proc_exe_path(pid)
+            if not exe or not want:
+                return True
+            if os.path.normcase(os.path.dirname(os.path.abspath(exe))) == want:
+                return True
+        return False
+
     def delete_save(self):
         srm = os.path.join(self.mesen_dir or ROOT, "Saves", "BsxBios.srm")
+        if self._mesen_running():
+            self._log(tr("log.save_del_blocked"))
+            messagebox.showwarning(tr("dlg.notice"), tr("dlg.save_del_running"))
+            return
         if not messagebox.askyesno(tr("dlg.del_save"), tr("dlg.del_save_msg")):
             return
         if not os.path.exists(srm):

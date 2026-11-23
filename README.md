@@ -4,6 +4,8 @@
   <b>简体中文</b> · <a href="README.en.md">English</a>
 </p>
 
+**当前版本：1.01**
+
 本项目基于 [BS-Zelda-Satellaview-Terminal](https://github.com/kiriqaq/BS-Zelda-Satellaview-Terminal) ，是特定为<strong>《BS侦探俱乐部 \~雪中消失的过去\~》银河战士贴吧社区版本汉化</strong>所制作的第三方辅助工具。功能与原项目基本相同，通过 Python 与 Mesen 模拟器联动，在虚拟时钟走到 18:00 的瞬间把广播数据推进模拟器的 `Satellaview/` 目录，同时开始播放对应的 `.wav` 广播音轨，以此模拟 Satellaview 游戏的实时同步广播功能。
 
 《BS侦探俱乐部 \~雪中消失的过去\~》为纯 SoundLink 游戏，相较于《BS塞尔达传说》不再提供“视频遮罩"与"结算单"等内容，但由于游戏中篇存在游戏内发音场景，仍需要额外的Lua脚本进行捕获。
@@ -20,10 +22,11 @@
 ## 构建流程
 
 1. **安装依赖**：
+   
    ```bash
    pip install -r requirements.txt
    ```
-
+   
 2. **配置模拟器**：
    * 下载并安装 Mesen，**必须**选择 `Store the data in same folder as the application`，且**路径不要带中文**。
    * 关闭模拟器。
