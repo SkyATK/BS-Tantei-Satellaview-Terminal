@@ -36,9 +36,9 @@ A third-party companion tool built on top of [BS-Zelda-Satellaview-Terminal](htt
    * Choose the chapter to broadcast: **Zenhen / Chuuhen / Kouhen**.
    * 简体中文 / English can be switched at the bottom-right of "Monitor panel / Advanced settings".
    * Press the step-3 button: the program launches Mesen itself (Chuuhen also loads the Lua script). When the clock reaches **18:00:00** the broadcast is pushed and the audio starts.
-   
+
 4. **Notes**
-   
+
    * **Do not use paths containing Chinese characters.**
    * Do not close or modify the Lua script while it is running.
    * Save inheritance in *BS Tantei Club* is weak — only the investigation points are totalled up after the broadcast ends, and it affects nothing else. The "Delete save data" feature inherited from the BS Zelda terminal is still present; it wipes **all** BS-related saves, so use it at your own discretion.
