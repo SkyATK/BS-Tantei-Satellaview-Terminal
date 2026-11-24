@@ -32,17 +32,17 @@ LANG_DEFAULT = "zh"
 LANG_CODES = ("zh", "en")
 LANG_LABELS = {"zh": "简体中文", "en": "English"}
 _TEXTS = {
-    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.01",
-                  "en": "Satellaview Terminal · BS Tantei Club 1.01"},
-    "ui.clock_title": {"zh": "虚拟广播时钟", "en": "Broadcast clock"},
-    "ui.chapter_label": {"zh": "推送篇章：", "en": "Chapter:"},
-    "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Monitor panel / Advanced settings"},
+    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.02",
+                  "en": "Satellaview Terminal · BS Tantei Club 1.02"},
+    "ui.clock_title": {"zh": "虚拟广播时钟", "en": "Virtual broadcast clock"},
+    "ui.chapter_label": {"zh": "推送篇章：", "en": "Chapter to push:"},
+    "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Show monitor panel / advanced settings"},
     "ui.lang_label": {"zh": "语言", "en": "Language"},
     "lbl.mesen": {"zh": "Mesen", "en": "Mesen"},
     "lbl.bios": {"zh": "BIOS", "en": "BIOS"},
     "lbl.audio": {"zh": "音频", "en": "Audio"},
-    "lbl.offset": {"zh": "起点偏移(ms)", "en": "Offset(ms)"},
-    "lbl.boot": {"zh": "开播等待", "en": "Boot delay"},
+    "lbl.offset": {"zh": "起点偏移(ms)", "en": "Start offset (ms)"},
+    "lbl.boot": {"zh": "开播等待", "en": "Boot wait"},
     "lbl.sec": {"zh": "秒", "en": "s"},
     "btn.browse": {"zh": "浏览", "en": "Browse"},
     "btn.default": {"zh": "默认", "en": "Default"},
@@ -50,234 +50,283 @@ _TEXTS = {
     "chapter.zenhen": {"zh": "前篇", "en": "Zenhen"},
     "chapter.chuuhen": {"zh": "中篇", "en": "Chuuhen"},
     "chapter.kouhen": {"zh": "后篇", "en": "Kouhen"},
-    "btn.step1": {"zh": "第 1 步：选择模拟器根目录的 Mesen.exe",
-                  "en": "Step 1: Select Mesen.exe"},
+    "btn.step1": {"zh": "第 1 步：选择模拟器根目录的Mesen.exe",
+                  "en": "Step 1: pick Mesen.exe in the emulator folder"},
     "btn.step2": {"zh": "第 2 步：选择 前篇 / 中篇 / 后篇",
-                  "en": "Step 2: Choose Zenhen / Chuuhen / Kouhen"},
-    "btn.step3": {"zh": "第 3 步：点击开始，将在 {boot} 秒后推送广播",
-                  "en": "Step 3: Start — push in {boot} s"},
-    "btn.delete_save": {"zh": "删除存档（需先关闭模拟器）",
-                        "en": "Delete save data (close the emulator first)"},
+                  "en": "Step 2: pick Zenhen / Chuuhen / Kouhen"},
+    "btn.step3": {"zh": "第 3 步：点击开始，将在 {boot} 秒后推送广播数据",
+                  "en": "Step 3: click Start, broadcast data pushed in {boot} s"},
+    "btn.char": {"zh": "人物存档：创建 / 检查",
+                 "en": "Character save data: create / check"},
     "stat.name_audio": {"zh": "音频", "en": "Audio"},
     "stat.name_lag": {"zh": "滞后", "en": "Lag"},
     "stat.name_rate": {"zh": "漂移率", "en": "Drift"},
     "stat.name_mute": {"zh": "静音", "en": "Mute"},
     "mute.off": {"zh": "未静音", "en": "not muted"},
-    "mute.fading": {"zh": "静音（渐弱中）", "en": "muting (fade out)"},
-    "mute.on": {"zh": "静音中 → {t} 恢复", "en": "muted → resumes {t}"},
-    "mute.resuming": {"zh": "恢复（渐强中）", "en": "resuming (fade in)"},
-    "status.pick_mesen": {"zh": "请定位模拟器的主程序 Mesen.exe",
-                          "en": "Locate the emulator: Mesen.exe"},
+    "mute.fading": {"zh": "静音渐弱", "en": "muting (fade out)"},
+    "mute.on": {"zh": "静音中，在{t} 恢复", "en": "muted, resumes at {t}"},
+    "mute.resuming": {"zh": "恢复渐强", "en": "resuming (fade in)"},
+    "status.pick_mesen": {"zh": "请定位模拟器的主程序Mesen.exe",
+                          "en": "Locate the emulator's Mesen.exe"},
     "status.pick_chapter": {"zh": "请选择要推送的篇章：前篇 / 中篇 / 后篇",
-                            "en": "Choose the chapter to broadcast: Zenhen / Chuuhen / Kouhen"},
+                            "en": "Choose the chapter to push: Zenhen / Chuuhen / Kouhen"},
     "status.hint_chapter_click": {"zh": "请点击下方 前篇 / 中篇 / 后篇 选择要推送的篇章",
-                                  "en": "Click Zenhen / Chuuhen / Kouhen below to pick a chapter"},
-    "status.chapter_locked": {"zh": "已锁定：{name}{dur}{hint}\n点击第 3 步按钮，{boot} 秒后推送广播",
-                              "en": "Locked: {name}{dur}{hint}\nClick Step 3 to push in {boot} s"},
-    "status.dur_suffix": {"zh": "，音频 {dur}", "en": " · audio {dur}"},
-    "status.id_collision": {"zh": "⚠️ 第 {n} 章与广场的广播 ID 完全相同\n固件会认为数据未更新 → 不会切章",
-                            "en": "⚠️ Chapter {n} has the same broadcast ID as the plaza\n"
-                                  "Firmware will treat it as no update → the chapter won't switch"},
-    "status.booting": {"zh": "正在推送初始数据（广场）…", "en": "Pushing initial data (plaza)…"},
-    "status.booting_toast": {"zh": "广场数据已推送，{boot} 秒后开播…",
-                             "en": "Plaza data pushed · on air in {boot} s…"},
+                                  "en": "Click Zenhen / Chuuhen / Kouhen below to choose a "
+                                        "chapter"},
+    "status.chapter_locked": {"zh": "已锁定：{name}{dur}{hint}\n点击第 3 步按钮，{boot} 秒后推送广播数据",
+                              "en": "Locked: {name}{dur}{hint}\n"
+                                    "Click the Step 3 button to push in {boot} s"},
+    "status.dur_suffix": {"zh": "，音频 {dur}", "en": ", audio {dur}"},
+    "status.id_collision": {"zh": "⚠️ 第 {n} 章与城镇的广播ID完全相同\n固件会认为数据未更新，无法推送广播数据",
+                            "en": "⚠️ Chapter {n} has the same broadcast ID as the town\n"
+                                  "The firmware treats the data as unchanged and cannot push"},
+    "status.booting": {"zh": "正在推送初始城镇数据……", "en": "Pushing the initial town data…"},
+    "status.booting_toast": {"zh": "已推送城镇数据，{boot} 秒后正式开播……",
+                             "en": "Town data pushed, going on air in {boot} s…"},
     "status.playing": {"zh": "广播中 · 正在播放音频", "en": "On air · playing audio"},
+    "status.char_prepare": {"zh": "正在等待创建人物：请在 BS-X BIOS中创建人物，成功进入城镇后即可关闭Mesen窗口",
+                            "en": "Waiting for the character: create it in the BS-X BIOS,\n"
+                                  "then close the Mesen window once you have entered the town"},
+    "status.char_ready": {"zh": "已确认创建人物，请选择篇章准备开播",
+                          "en": "Character confirmed, pick a chapter to go on air"},
     "status.play_running": {"zh": "广播中 · 音频 {pos}{total}\n滞后 {lag}{muted}",
                             "en": "On air · audio {pos}{total}\nLag {lag}{muted}"},
     "status.total_suffix": {"zh": " / {t}", "en": " / {t}"},
     "status.muted_tag": {"zh": "　[静音中]", "en": "  [muted]"},
-    "status.mesen_closed_stopped": {"zh": "Mesen 已关闭 · 已停止播放",
+    "status.mesen_closed_stopped": {"zh": "Mesen已关闭 · 已停止播放",
                                     "en": "Mesen closed · playback stopped"},
-    "status.lua_stopped_closing": {"zh": "Lua 脚本已停止 · 正在关闭 Mesen",
+    "status.lua_stopped_closing": {"zh": "Lua脚本已停止 · 正在关闭Mesen",
                                    "en": "Lua script stopped · closing Mesen"},
-    "status.mesen_closed_reset": {"zh": "Mesen 已关闭 · 已停止并回到初始状态\n请重新选择要推送的篇章",
-                                  "en": "Mesen closed · stopped, back to start\n"
-                                        "Choose the chapter again"},
-    "status.lua_closed_reset": {"zh": "Lua 脚本窗口已关闭 · 已关闭 Mesen 并回到初始状态\n"
-                                     "请重新选择要推送的篇章",
-                                "en": "Lua script window closed · Mesen closed, back to start\n"
-                                      "Choose the chapter again"},
-    "status.finished_reset": {"zh": "播放结束 · 已关闭 Mesen 并回到初始状态\n请重新选择要推送的篇章",
-                              "en": "Playback finished · Mesen closed, back to start\n"
-                                    "Choose the chapter again"},
-    "status.finished_in3": {"zh": "播放结束\n3 秒后回到初始状态…", "en": "Playback finished\nResetting in 3 s…"},
+    "status.mesen_closed_reset": {"zh": "Mesen已关闭 · 已停止并回到初始状态\n请重新选择要推送的篇章",
+                                  "en": "Mesen closed · stopped, back to the initial state\n"
+                                        "Choose the chapter to push again"},
+    "status.lua_closed_reset": {"zh": "Lua脚本窗口已关闭 · 已关闭Mesen并回到初始状态\n请重新选择要推送的篇章",
+                                "en": "Lua script window closed · Mesen closed, back to the initial state\n"
+                                      "Choose the chapter to push again"},
+    "status.finished_reset": {"zh": "放送结束 · 已关闭Mesen并回到初始状态\n请重新选择要推送的篇章",
+                              "en": "Broadcast finished · Mesen closed, back to the initial state\n"
+                                    "Choose the chapter to push again"},
+    "status.finished_in3": {"zh": "播放结束\n3 秒后回到初始状态……", "en": "Playback finished\n"
+                                                              "Back to the initial state in 3 s…"},
     "status.finished_k": {"zh": "播放结束 · 漂移率 k={k}（{pct}%）",
-                          "en": "Finished · drift k={k} ({pct}%)"},
+                          "en": "Playback finished · drift k={k} ({pct}%)"},
     "status.finished": {"zh": "播放结束", "en": "Playback finished"},
-    "status.error": {"zh": "出错：{e}", "en": "Error: {e}"},
-    "status.bios_missing": {"zh": "错误：BS-X BIOS 未配置", "en": "Error: BS-X BIOS not configured"},
-    "status.bios_missing_entry": {"zh": "（缺失，点右侧「浏览」选择）",
-                                  "en": "(missing — click Browse on the right)"},
+    "status.error": {"zh": "错误：{e}", "en": "Error: {e}"},
+    "status.bios_missing": {"zh": "错误：未配置BS-X BIOS", "en": "Error: BS-X BIOS not configured"},
+    "status.bios_missing_entry": {"zh": "BIOS缺失，请点击右侧“浏览”选择",
+                                  "en": "BIOS missing, click Browse on the right"},
     "hint.lua": {"zh": "，请勿修改或关闭Lua脚本",
-                 "en": " — do not edit or close the Lua script"},
-    "dlg.files_exe": {"zh": "可执行文件", "en": "Executables"},
-    "dlg.files_bios": {"zh": "BS-X BIOS / SFC", "en": "BS-X BIOS / SFC"},
+                 "en": ", do not touch the Lua script"},
+    "dlg.files_exe": {"zh": "可执行文件", "en": "Executable"},
+    "dlg.files_bios": {"zh": "BS-X BIOS", "en": "BS-X BIOS"},
     "dlg.files_all": {"zh": "所有文件", "en": "All files"},
     "dlg.files_wav": {"zh": "WAV", "en": "WAV"},
-    "dlg.pick_mesen": {"zh": "请选择模拟器根目录的 Mesen.exe",
-                       "en": "Select Mesen.exe in the emulator folder"},
-    "dlg.pick_bios": {"zh": "请选择 BS-X BIOS", "en": "Select the BS-X BIOS"},
-    "dlg.replace_bios": {"zh": "更换 BIOS", "en": "Replace BIOS"},
-    "dlg.replace_bios_msg": {"zh": "将用选中的文件覆盖：\n{name}\n\n继续吗？",
-                             "en": "This will overwrite:\n{name}\n\nContinue?"},
+    "dlg.pick_mesen": {"zh": "请选择模拟器根目录的Mesen.exe",
+                       "en": "Pick Mesen.exe in the emulator folder"},
+    "dlg.pick_bios": {"zh": "请选择BS-X BIOS", "en": "Pick the BS-X BIOS"},
+    "dlg.replace_bios": {"zh": "更换BIOS", "en": "Replace BIOS"},
+    "dlg.replace_bios_msg": {"zh": "将用选中的文件覆盖当前BIOS：\n{name}\n\n继续吗？",
+                             "en": "The selected file will overwrite the current BIOS:\n"
+                                   "{name}\n\nContinue?"},
     "dlg.error": {"zh": "错误", "en": "Error"},
-    "dlg.bios_copy_fail": {"zh": "无法复制 BIOS：{e}", "en": "Cannot copy the BIOS: {e}"},
-    "dlg.bios_check": {"zh": "BS-X BIOS 检查", "en": "BS-X BIOS check"},
-    "dlg.bios_check_msg": {"zh": "未找到 BS-X BIOS，请手动选择日文 BIOS 文件。",
-                           "en": "BS-X BIOS not found. Please pick the Japanese BIOS file."},
+    "dlg.bios_copy_fail": {"zh": "无法复制BIOS：{e}", "en": "Cannot copy the BIOS: {e}"},
+    "dlg.bios_check": {"zh": "BS-X BIOS检查", "en": "BS-X BIOS check"},
+    "dlg.bios_check_msg": {"zh": "未找到BS-X BIOS，请手动选择日版BIOS文件。",
+                           "en": "BS-X BIOS not found. Pick the Japanese BIOS file manually."},
     "dlg.notice": {"zh": "提示", "en": "Notice"},
     "dlg.pick_chapter_first": {"zh": "请先选择篇章，再指定该篇章的音频。",
                                "en": "Choose a chapter first, then pick its audio."},
-    "dlg.pick_wav": {"zh": "选择要播放的广播音频", "en": "Select the broadcast audio to play"},
+    "dlg.pick_wav": {"zh": "选择要播放的广播音频", "en": "Pick the broadcast audio to play"},
     "dlg.cannot_start": {"zh": "无法开始", "en": "Cannot start"},
-    "dlg.mesen_missing": {"zh": "未找到 Mesen.exe，请重新选择。",
-                          "en": "Mesen.exe not found — please select it again."},
+    "dlg.bs_lua_missing": {"zh": "终端必要文件bs.lua缺失，请重新检查！",
+                           "en": "Required terminal file bs.lua is missing, please check "
+                                 "again!"},
+    "dlg.settings_missing": {"zh": "Mesen配置文件settings.json缺失，请重新检查！",
+                             "en": "Mesen settings file settings.json is missing, please "
+                                   "check again!"},
+    "dlg.mesen_missing": {"zh": "未找到Mesen.exe，请重新选择。",
+                          "en": "Mesen.exe not found, please pick it again."},
     "dlg.chapter_missing": {"zh": "请先选择篇章。", "en": "Choose a chapter first."},
     "dlg.files_missing": {"zh": "缺少文件", "en": "Missing files"},
     "dlg.file_missing_msg": {"zh": "{name} 不存在：\n{p}", "en": "{name} not found:\n{p}"},
-    "dlg.bad_param": {"zh": "参数错误", "en": "Invalid value"},
+    "dlg.bad_param": {"zh": "参数错误", "en": "Invalid parameter"},
     "dlg.offset_int": {"zh": "起点偏移必须是整数（毫秒）。",
-                       "en": "Start offset must be an integer (ms)."},
-    "dlg.del_save": {"zh": "删除存档确认", "en": "Confirm save deletion"},
-    "dlg.del_save_msg": {"zh": "确定删除 BS-X BIOS 存档（Saves/BsxBios.srm）吗？\n"
-                              "会清除游戏内注册的角色与全部广播游戏进度。",
-                         "en": "Delete the BS-X BIOS save (Saves/BsxBios.srm)?\n"
-                               "This clears the registered character and all broadcast progress."},
-    "dlg.ok": {"zh": "成功", "en": "Done"},
-    "dlg.save_deleted": {"zh": "存档已删除。", "en": "Save deleted."},
-    "dlg.save_not_found": {"zh": "未找到存档文件，无需删除。",
-                           "en": "No save file found — nothing to delete."},
-    "dlg.save_del_fail": {"zh": "无法删除存档：{e}\n请先关闭 Mesen。",
-                          "en": "Cannot delete the save: {e}\nClose Mesen first."},
-    "dlg.save_del_running": {"zh": "检测到 Mesen 仍在运行，存档没有删除。\n"
-                                   "请先关闭 Mesen 窗口，再点「删除存档」。",
-                             "en": "Mesen is still running — the save was NOT deleted.\n"
-                                   "Close Mesen first, then click Delete save data again."},
+                       "en": "The start offset must be an integer (ms)."},
+    "dlg.save_title": {"zh": "人物存档", "en": "Character save data"},
+    "dlg.save_found_msg": {"zh": "人物存档状态正常。\n\n存档位置：\n{p}\n\n请选择篇章开始推送广播数据。",
+                           "en": "Character save data looks fine.\n\nSave data location:\n{p}\n"
+                                 "\nPick a chapter to start pushing the broadcast data."},
+    "dlg.save_nochar_msg": {"zh": "检测到存档文件中没有人物数据或数据异常：\n{p}\n\n运行《BS侦探俱乐部》必须先创建人物。"
+                                  "\n现在启动Mesen去创建吗？\n\n· 创建人物成功前，终端不会推送游戏广播数据。"
+                                  "\n· 在BIOS中创建人物，成功进入城镇后即可关闭Mesen窗口。",
+                           "en": "No character data (or abnormal data) found in the save data:\n"
+                                 "{p}\n\nRunning BS Tantei Club requires a character first.\n"
+                                 "Launch Mesen to create one now?\n\n"
+                                 "· The terminal will not push game broadcast data until the character is created.\n"
+                                 "· Create the character in the BIOS; once you have entered the town, you can close the Mesen window."},
+    "dlg.save_nochar_blocked": {"zh": "检测到存档文件中没有人物数据或数据异常：\n{p}\n\n运行《BS侦探俱乐部》必须先创建人物。"
+                                      "\n现在启动Mesen去创建吗？\n\n· 创建人物成功前，终端不会推送游戏广播数据。"
+                                      "\n· 在BIOS中创建人物，成功进入城镇后即可关闭Mesen窗口。",
+                               "en": "No character data (or abnormal data) found in the save data:\n"
+                                     "{p}\n\n"
+                                     "Running BS Tantei Club requires a character first.\n"
+                                     "Launch Mesen to create one now?\n\n"
+                                     "· The terminal will not push game broadcast data until the character is created.\n"
+                                     "· Create the character in the BIOS; once you have entered the town, you can close the Mesen window."},
+    "dlg.save_missing_msg": {"zh": "未检测到BS-X存档：\n{p}\n\n运行《BS侦探俱乐部》必须先创建人物。\n现在启动Mesen去创建吗？"
+                                   "\n\n· 创建人物成功前，终端不会推送游戏广播数据。\n· 在BIOS中创建人物，成功进入城镇后即可关闭Mesen窗口。",
+                             "en": "No BS-X save data detected:\n{p}\n\n"
+                                   "Running BS Tantei Club requires a character first.\n"
+                                   "Launch Mesen to create one now?\n\n"
+                                   "· The terminal will not push game broadcast data until the character is created.\n"
+                                   "· Create the character in the BIOS; once you have entered the town, you can close the Mesen window."},
+    "dlg.save_blocked": {"zh": "未检测到BS-X存档：\n{p}\n\n运行《BS侦探俱乐部》必须先创建人物。\n现在启动Mesen去创建吗？"
+                               "\n\n· 创建人物成功前，终端不会推送游戏广播数据。\n· 在BIOS中创建人物，成功进入城镇后即可关闭Mesen窗口。",
+                         "en": "No BS-X save data detected:\n{p}\n\n"
+                               "Running BS Tantei Club requires a character first.\n"
+                               "Launch Mesen to create one now?\n\n"
+                               "· The terminal will not push game broadcast data until the character is created.\n"
+                               "· Create the character in the BIOS; once you have entered the town, you can close the Mesen window."},
+    "dlg.save_busy": {"zh": "Mesen正在运行。\n\n请建好人物后并关闭Mesen窗口。",
+                      "en": "Mesen is running.\n\n"
+                            "Create the character, then close the Mesen window."},
+    "dlg.save_ready": {"zh": "人物存档创建完成。\n\n存档位置：\n{p}\n\n请选择篇章开始推送广播数据。",
+                       "en": "Character save data created.\n\nSave data location:\n{p}\n\n"
+                             "Pick a chapter to start pushing the broadcast data."},
+    "dlg.save_pending": {"zh": "人物创建失败：\n{p}\n\n您在人物创建时可能提前关闭了Mesen窗口。\n请重新进行人物创建流程。",
+                         "en": "Character creation failed:\n{p}\n\n"
+                               "You may have closed the Mesen window too early while creating the character.\n"
+                               "Run the character creation again."},
+    "dlg.char_launch_fail": {"zh": "无法启动Mesen：{e}", "en": "Cannot launch Mesen: {e}"},
     "log.mesen_selected": {"zh": "[模拟器] {path}", "en": "[Emulator] {path}"},
     "log.mesen_auto": {"zh": "[模拟器] 自动识别 {path}", "en": "[Emulator] auto-detected {path}"},
     "log.ini_loaded": {"zh": "[配置] 已读取 {path}", "en": "[Config] loaded {path}"},
-    "log.ini_absent": {"zh": "[配置] 未找到 {path}，全部按自动查找",
-                       "en": "[Config] {path} not found — auto-detect only"},
+    "log.ini_absent": {"zh": "[配置] 未找到 {path}",
+                       "en": "[Config] {path} not found"},
     "log.ini_item": {"zh": "[配置] {name} = {path}{tag}", "en": "[Config] {name} = {path}{tag}"},
-    "log.ini_item_bad": {"zh": "  🔴 路径不存在", "en": "  🔴 does not exist"},
-    "log.ini_mesen_missing": {"zh": "[配置] mesen 指向的路径不存在：{path}（改回自动查找）",
-                             "en": "[Config] mesen path not found: {path} (falling back to auto-detect)"},
-    "log.data_auto": {"zh": "[配置] data 未设置，自动定位广播数据：{dir}",
-                      "en": "[Config] data not set, broadcast data resolved to {dir}"},
+    "log.ini_item_bad": {"zh": "路径不存在", "en": "path not found"},
+    "log.ini_mesen_missing": {"zh": "[配置] Mesen指向的路径不存在：{path}",
+                             "en": "[Config] the path Mesen points to does not exist: {path}"},
+    "log.data_auto": {"zh": "[配置] data未设置，自动定位广播数据：{dir}",
+                      "en": "[Config] data not set, broadcast data located automatically: {dir}"},
     "log.ini_written": {"zh": "[配置] 已写回 config.ini：{name} = {path}",
                         "en": "[Config] written back to config.ini: {name} = {path}"},
-    "log.ini_auto_saved": {"zh": "[配置] 自动记住到 config.ini：{name} = {path}",
-                           "en": "[Config] remembered to config.ini: {name} = {path}"},
-    "log.ini_cleared": {"zh": "[配置] 已清空 config.ini 的 {name}（改回自动查找）",
-                        "en": "[Config] cleared {name} in config.ini (auto-detect again)"},
-    "log.ini_write_fail": {"zh": "[配置] 写不回 config.ini：{e}",
-                           "en": "[Config] cannot write config.ini: {e}"},
-    "lbl.data": {"zh": "数据目录", "en": "Data dir"},
+    "log.ini_auto_saved": {"zh": "[配置] 自动写入config.ini：{name} = {path}",
+                           "en": "[Config] saved to config.ini automatically: {name} = {path}"},
+    "log.ini_cleared": {"zh": "[配置] 已清空config.ini 的 {name}",
+                        "en": "[Config] cleared {name} in config.ini"},
+    "log.ini_write_fail": {"zh": "[配置] 写回config.ini错误：{e}",
+                           "en": "[Config] error writing config.ini: {e}"},
+    "lbl.data": {"zh": "数据目录", "en": "Data folder"},
     "log.data_looks_wrong": {"zh": "[配置] 注意：{dir} 下没有 0/1/2/3 子目录",
                              "en": "[Config] note: no 0/1/2/3 subfolders under {dir}"},
-    "dlg.pick_data": {"zh": "请选择 bstantei 目录（其下有 0 1 2 3 和 wav）",
-                      "en": "Select the bstantei folder (it contains 0 1 2 3 and wav)"},
+    "dlg.pick_data": {"zh": "请选择bstantei资源包目录",
+                      "en": "Pick the bstantei resource folder"},
     "log.bios_selected": {"zh": "[BIOS] {name}", "en": "[BIOS] {name}"},
     "log.bios_replaced": {"zh": "[BIOS] 已替换为 {name}（源 {src}）",
                           "en": "[BIOS] replaced with {name} (from {src})"},
-    "log.bios_placed": {"zh": "[BIOS] 已放入根目录: {name}", "en": "[BIOS] placed in root: {name}"},
+    "log.bios_placed": {"zh": "[BIOS] 已放入根目录: {name}", "en": "[BIOS] placed in the root: {name}"},
     "log.chapter": {"zh": "[篇章] {name}（week {n}）{dur}{hint}",
                     "en": "[Chapter] {name} (week {n}){dur}{hint}"},
     "log.broadcast_id": {"zh": "[广播ID] 广场={a}  第{n}章={b}{tag}",
                          "en": "[Broadcast ID] plaza={a}  chapter{n}={b}{tag}"},
-    "log.id_same": {"zh": "  🔴 撞车：换周不会触发！", "en": "  🔴 identical: the week won't trigger!"},
-    "log.id_ok": {"zh": "  ✓ 不同，可触发", "en": "  ✓ different, will trigger"},
+    "log.id_same": {"zh": "广播ID重复，无法推送广播数据！", "en": "Broadcast IDs are identical, cannot push "
+                                                    "the broadcast data!"},
+    "log.id_ok": {"zh": "广播ID不同，正常推送广播数据", "en": "Broadcast IDs differ, pushing the broadcast "
+                                                 "data as usual"},
     "log.audio_custom": {"zh": "[音频] 指定 {name}{info}", "en": "[Audio] using {name}{info}"},
     "log.audio_default": {"zh": "[音频] 恢复默认音频", "en": "[Audio] back to the default audio"},
-    "log.cfg_backup": {"zh": "[配置] 原始 settings.json 已备份 -> {path}",
-                       "en": "[Config] original settings.json backed up -> {path}"},
+    "log.cfg_backup": {"zh": "[配置]  已备份原始settings.json： {path}",
+                       "en": "[Config] original settings.json backed up: {path}"},
     "log.patch": {"zh": "[配置] {k}: {v}", "en": "[Config] {k}: {v}"},
     "patch.fps": {"zh": "帧率", "en": "Frame rate"},
     "patch.lua": {"zh": "Lua", "en": "Lua"},
     "patch.shortcuts": {"zh": "快捷键", "en": "Shortcuts"},
     "patch.shortcuts_cleared": {"zh": "已清空 {n} 项时间轴快捷键",
                                 "en": "{n} timeline shortcuts cleared"},
-    "log.cfg_missing": {"zh": "[配置] ⚠️ settings.json 不存在，跳过补丁（BS-X 时间可能不对）",
-                        "en": "[Config] ⚠️ settings.json not found, patch skipped (BS-X time may be wrong)"},
     "log.sat_cleared": {"zh": "[1/5] Satellaview/ 清空 {n} 项，拷入广场数据 {ok} 个{skipped}",
-                        "en": "[1/5] Satellaview/ cleared {n} items, plaza data copied: {ok}{skipped}"},
+                        "en": "[1/5] Satellaview/ cleared {n} items, town data copied: {ok} "
+                              "items{skipped}"},
     "log.skipped": {"zh": "（跳过 {n} 个非文件）", "en": " (skipped {n} non-files)"},
-    "log.lua_missing": {"zh": "[脚本] ⚠️ 未找到 {name}，静音不可用",
-                        "en": "[Script] ⚠️ {name} not found, muting unavailable"},
-    "log.launch": {"zh": "[2/5] 启动 Mesen：{exe}{lua}", "en": "[2/5] Launching Mesen: {exe}{lua}"},
+    "log.launch": {"zh": "[2/5] 启动Mesen：{exe}{lua}", "en": "[2/5] Launching Mesen: {exe}{lua}"},
     "log.launch_lua": {"zh": " + {name}", "en": " + {name}"},
     "log.launch_nolua": {"zh": "（不加载 lua）", "en": " (no lua)"},
     "log.clock": {"zh": "[3/5] 虚拟时钟 {start} → 18:00:00（{boot}s）",
-                  "en": "[3/5] Virtual clock {start} → 18:00:00 ({boot}s)"},
-    "log.chapter_pushed": {"zh": "[4/5] 推送章节数据 {ok} 个 -> Satellaview/{skipped}",
-                           "en": "[4/5] Chapter data pushed: {ok} -> Satellaview/{skipped}"},
+                  "en": "[3/5] virtual clock {start} → 18:00:00 ({boot}s)"},
+    "log.chapter_pushed": {"zh": "[4/5] 推送章节数据 {ok} 个，Satellaview/{skipped}",
+                           "en": "[4/5] pushed {ok} chapter items, Satellaview/{skipped}"},
     "log.audio_dev": {"zh": "[音频] 设备={dev} buffer={frames} 帧",
                       "en": "[Audio] device={dev} buffer={frames} frames"},
     "log.offset_late": {"zh": "[音频] 起点偏移 +{ms}ms：延后 {s:.3f}s 起播",
                         "en": "[Audio] start offset +{ms}ms: playback delayed by {s:.3f}s"},
     "log.offset_skip": {"zh": "[音频] 起点偏移 {ms}ms：跳过开头 {s:.3f}s",
-                        "en": "[Audio] start offset {ms}ms: skipping first {s:.3f}s"},
+                        "en": "[Audio] start offset {ms}ms: skipping the first {s:.3f}s"},
     "log.play": {"zh": "[5/5] 播放 {name}", "en": "[5/5] Playing {name}"},
-    "log.abort_wait": {"zh": "[中止] 用户在等待期停止。", "en": "[Abort] stopped by user while waiting."},
-    "log.abort": {"zh": "[中止] 用户停止。", "en": "[Abort] stopped by user."},
-    "log.mesen_closed_wait": {"zh": "[退出] 等待期检测到 Mesen 已关闭 → 停止推送，回到初始状态。",
-                              "en": "[Exit] Mesen closed while waiting → push stopped, back to start."},
-    "log.mesen_closed_play": {"zh": "[退出] 检测到 Mesen 已关闭 → 停止音频与推送，回到初始状态。",
-                              "en": "[Exit] Mesen closed → audio and push stopped, back to start."},
-    "log.no_closed_marker": {"zh": "[脚本] ⚠️ 未找到 script_closed.txt，已查目录: {dirs}",
-                             "en": "[Script] ⚠️ script_closed.txt not found, looked in: {dirs}"},
-    "log.no_script_window": {"zh": "[脚本] 没在 Mesen 里认出脚本窗口（标题可能是本地化的），当前窗口: {titles}",
-                             "en": "[Script] no script window recognised in Mesen (title may be localized), "
-                                   "windows: {titles}"},
-    "log.flag_file": {"zh": "[静音] 标记文件 {path}", "en": "[Mute] flag file {path}"},
-    "log.exits": {"zh": "[静音] 恢复时刻（音频内容）{a} → 真实时间 {b}（起点偏移 {ms} 已计入，整条时间轴一起平移）",
-                  "en": "[Mute] resume points (audio content) {a} → real time {b} "
-                        "(start offset {ms} included; the whole timeline shifts together)"},
-    "log.flag_missing": {"zh": "[静音] ⚠️ 标记文件暂不存在 —— 需 Mesen 里加载 scene_mute.lua（AllowIoOsPermission）；"
-                               "未加载则静音不触发。",
-                         "en": "[Mute] ⚠️ flag file not there yet — load scene_mute.lua in Mesen "
-                               "(AllowIoOsPermission); muting will not fire without it."},
-    "log.marker_found": {"zh": "[静音] 已检测到标记文件", "en": "[Mute] flag file detected"},
-    "log.marker_ready": {"zh": "[脚本] 关闭标记已就位：{path}",
-                         "en": "[Script] close marker in place: {path}"},
-    "log.enter_rejected": {"zh": "[静音] t={t} 收到进入 #{seq}，但 {why} → 不静音",
-                           "en": "[Mute] t={t} got entry #{seq}, but {why} → not muting"},
-    "log.enter_accept": {"zh": "[静音] t={t} 进入发声场景 #{seq} → 渐弱到 0（继续播放），固定于 {exit} 恢复",
-                         "en": "[Mute] t={t} entered sound scene #{seq} → fading to 0 (keeps playing), "
-                               "resumes at {exit}"},
-    "log.rescan": {"zh": "[静音] 已定位标记文件 {path}", "en": "[Mute] flag file located: {path}"},
-    "log.restore": {"zh": "[静音] 到恢复时刻（t={t}）→ 渐强 0.5s（本次静音 {held:.1f}s，音频全程未停）",
-                    "en": "[Mute] resume point reached (t={t}) → fading in 0.5s "
-                          "(muted {held:.1f}s, audio never stopped)"},
+    "log.abort_wait": {"zh": "[中止] 用户在等待期停止。", "en": "[Abort] stopped by the user while "
+                                                     "waiting."},
+    "log.abort": {"zh": "[中止] 用户停止。", "en": "[Abort] stopped by the user."},
+    "log.mesen_closed_wait": {"zh": "[退出] 等待期检测到Mesen关闭，停止推送，回到初始状态。",
+                              "en": "[Exit] Mesen closed while waiting, push stopped, back to "
+                                    "the initial state."},
+    "log.mesen_closed_play": {"zh": "[退出] 检测到Mesen关闭，停止音频与推送，回到初始状态。",
+                              "en": "[Exit] Mesen closed, audio and push stopped, back to the "
+                                    "initial state."},
+    "log.exits": {"zh": "[静音] 音频恢复时刻 {a}，真实时间 {b}",
+                  "en": "[Mute] audio resume time {a}, real time {b}"},
+    "log.enter_rejected": {"zh": "[静音] t={t} 收到进入 #{seq}，但 {why}，不静音",
+                           "en": "[Mute] t={t} got entry #{seq}, but {why}, not muting"},
+    "log.enter_accept": {"zh": "[静音] t={t} 进入发声场景 #{seq}，渐弱到 0（继续播放），固定于 "
+                               "{exit} 恢复",
+                         "en": "[Mute] t={t} entered the sound scene #{seq}, fading to 0 "
+                               "(keeps playing), resumes at {exit}"},
+    "log.restore": {"zh": "[静音] 到恢复时刻（t={t}），渐强 0.5s（本次静音 {held:.1f}s）",
+                    "en": "[Mute] resume time reached (t={t}), fading in over 0.5 s (muted "
+                          "{held:.1f}s)"},
     "log.lag_line": {"zh": "  {w} | 音频 {pos} | 滞后 {lag}{tag}",
                      "en": "  {w} | audio {pos} | lag {lag}{tag}"},
-    "log.stats": {"zh": "[统计] {n} 点：播放速率 k={k:.6f}（{pct}%） —— 1.000000=不漂",
-                  "en": "[Stats] {n} samples: playback rate k={k:.6f} ({pct}%) — 1.000000 = no drift"},
-    "log.done_closed": {"zh": "[完成] Mesen 已关闭 → 已停止播放，即将回到初始状态。",
-                        "en": "[Done] Mesen closed → playback stopped, returning to start."},
+    "log.stats": {"zh": "[统计] {n} 点：播放速率 k={k:.6f}（{pct}%），1.000000=不漂",
+                  "en": "[Stats] {n} samples: playback rate k={k:.6f} ({pct}%), 1.000000 = "
+                        "no drift"},
+    "log.done_closed": {"zh": "[完成] Mesen 已关闭。已停止播放，即将回到初始状态。",
+                        "en": "[Done] Mesen closed. Playback stopped, back to the initial "
+                              "state."},
     "log.done": {"zh": "[完成] 音频播放结束。", "en": "[Done] audio playback finished."},
     "log.reset": {"zh": "[系统] 重置状态", "en": "[System] state reset"},
-    "log.mesen_closed_sys": {"zh": "[系统] Mesen 已关闭 → 停止推送并回到初始状态",
-                             "en": "[System] Mesen closed → push stopped, back to start"},
-    "log.lua_closed_sys": {"zh": "[系统] bs.lua 脚本窗口被关闭 → 已关闭 Mesen 并回到初始状态",
-                           "en": "[System] bs.lua window closed → Mesen closed, back to start"},
-    "log.auto_reset": {"zh": "[系统] 播放结束 → 回到初始状态", "en": "[System] playback finished → back to start"},
-    "log.save_deleted": {"zh": "[存档] 已删除 {path}", "en": "[Save] deleted {path}"},
-    "log.save_del_blocked": {"zh": "[存档] 检测到 Mesen 仍在运行 → 已拦截，未删除存档",
-                             "en": "[Save] Mesen still running → blocked, save not deleted"},
+    "log.mesen_closed_sys": {"zh": "[系统] Mesen已关闭，停止推送并回到初始状态",
+                             "en": "[System] Mesen closed, push stopped, back to the initial "
+                                   "state"},
+    "log.lua_closed_sys": {"zh": "[系统] bs.lua脚本窗口被关闭，已关闭Mesen并回到初始状态",
+                           "en": "[System] the bs.lua script window was closed, Mesen closed, "
+                                 "back to the initial state"},
+    "log.auto_reset": {"zh": "[系统] 播放结束，返回初始状态", "en": "[System] playback finished, back to "
+                                                       "the initial state"},
+    "log.save_ok": {"zh": "[存档] 已在存档中检测到角色数据：{path}",
+                    "en": "[Save data] character data found in the save data: {path}"},
+    "log.save_nochar": {"zh": "[存档] 未在存档中检测到角色数据：{path}",
+                        "en": "[Save data] no character data found in the save data: {path}"},
+    "log.save_missing": {"zh": "[存档] 未检测到角色数据：{path}",
+                         "en": "[Save data] no save data detected: {path}"},
+    "log.char_launch": {"zh": "[人物创建] 启动Mesen，不推送游戏广播数据：{exe}",
+                        "en": "[Character] launching Mesen without pushing game broadcast "
+                              "data: {exe}"},
+    "log.char_done": {"zh": "[人物创建] Mesen已关闭，存档状态：{state}",
+                      "en": "[Character] Mesen closed, save data state: {state}"},
+    "log.char.state_ok": {"zh": "已检测到角色数据", "en": "character data found"},
+    "log.char.state_no": {"zh": "角色数据检测异常", "en": "character data check failed"},
     "log.error": {"zh": "[错误] {e}", "en": "[Error] {e}"},
-    "log.close_fail": {"zh": "[关闭] 请求关闭 Mesen 失败：{e}", "en": "[Close] closing Mesen failed: {e}"},
-    "log.closed": {"zh": "[关闭] 已关闭 Mesen。", "en": "[Close] Mesen closed."},
-    "log.killed": {"zh": "[关闭] terminate 2 秒未退出 → 已强制关闭 Mesen。",
-                   "en": "[Close] not exited in 2 s after terminate → force-closed Mesen."},
-    "log.kill_fail": {"zh": "[关闭] 强制关闭 Mesen 失败：{e}", "en": "[Close] force-close failed: {e}"},
-    "log.lua_stopped": {"zh": "[退出] 检测到 bs.lua 已停止（{why}）→ 关闭 Mesen。",
-                        "en": "[Exit] bs.lua stopped ({why}) → closing Mesen."},
-    "log.why_script": {"zh": "scriptEnded 标记", "en": "scriptEnded marker"},
+    "log.close_fail": {"zh": "[关闭] 关闭Mesen失败：{e}", "en": "[Close] closing Mesen failed: {e}"},
+    "log.closed": {"zh": "[关闭] 已关闭Mesen。", "en": "[Close] Mesen closed."},
+    "log.killed": {"zh": "[关闭] terminate 2秒未退出，已强制关闭Mesen。",
+                   "en": "[Close] not exited within 2 s of terminate, Mesen force-closed."},
+    "log.kill_fail": {"zh": "[关闭] 强制关闭Mesen失败：{e}", "en": "[Close] force-closing Mesen "
+                                                          "failed: {e}"},
+    "log.lua_stopped": {"zh": "[退出] 检测到bs.lua已停止（{why}），关闭 Mesen。",
+                        "en": "[Exit] bs.lua stopped ({why}), closing Mesen."},
+    "log.why_script": {"zh": "scriptEnded标记", "en": "scriptEnded marker"},
     "log.why_window": {"zh": "脚本窗口消失", "en": "script window gone"},
-    "why.all_passed": {"zh": "已过全部恢复时刻", "en": "all resume points have passed"},
+    "why.all_passed": {"zh": "已过全部恢复时刻", "en": "all resume times have passed"},
     "why.too_early": {"zh": "距恢复时刻 {a} 还有 {b}（> {c}）",
-                      "en": "still {b} to the resume point {a} (> {c})"},
+                      "en": "{b} left until the resume time {a} (> {c})"},
     "why.cooldown": {"zh": "距上次恢复仅 {n:.0f}s（< {c:.0f}s）",
                      "en": "only {n:.0f}s since the last resume (< {c:.0f}s)"},
     "err.time_format": {"zh": "时间格式无法解析: {t}", "en": "cannot parse the time: {t}"},
@@ -465,7 +514,6 @@ BACKUP_DIR = os.path.join(os.environ.get("LOCALAPPDATA") or os.path.expanduser("
 CFG_PATH = os.path.join(APP_DIR, "data", "tantei_terminal.json")
 CFG_PATH_LEGACY = os.path.join(ROOT, "_generated", "config", "tantei_terminal.json")
 LUA_SCENE_MUTE = os.path.join(APP_DIR, "bs.lua")
-LUA_SCENE_MUTE_LEGACY = os.path.join(ROOT, "_generated", "scripts", "lua", "scene_mute.lua")
 LOGO_PNG = _res_file("ui", "icon.png")
 ICON_SIZES = (16, 20, 24, 32, 40, 48, 64, 96, 128, 256)
 FONT_CANDIDATES = [
@@ -505,9 +553,8 @@ def wav_dir():
     return data_path("bstantei", "wav")
 
 def lua_path():
-    if os.path.exists(LUA_SCENE_MUTE):
-        return LUA_SCENE_MUTE
-    return LUA_SCENE_MUTE_LEGACY
+    # 只认发行版这份 bs.lua：找不到就由开播硬闸报错，绝不回退到研究原稿
+    return LUA_SCENE_MUTE
 
 def rel(p, root=None):
     try:
@@ -663,7 +710,6 @@ class LuaStopSignal:
         self.dir = None
         self.armed = False
         self.hits = 0
-        self._logged = False
 
     def _base_dirs(self):
         out = [os.path.join(self.mesen_dir, "LuaScriptData")]
@@ -706,9 +752,6 @@ class LuaStopSignal:
                 except OSError:
                     continue
             self.dir = d
-            if self.log and not self._logged:
-                self._logged = True
-                self.log(tr("log.marker_ready", path=p))
             return p
         return None
 
@@ -853,15 +896,18 @@ def resolve_flag_file(explicit, root):
     if explicit:
         return os.path.abspath(explicit)
     base = os.path.join(root, "LuaScriptData")
+    # 只认当前脚本自己的数据目录（Mesen 用脚本名建目录 → LuaScriptData/bs/）；
+    # 老脚本遗留的 LuaScriptData/scene_mute/ 里那份标记文件一律不算，免得读到旧序号
+    stem = os.path.splitext(os.path.basename(lua_path()))[0]
     found = []
     if os.path.isdir(base):
         for dirpath, _dirnames, filenames in os.walk(base):
-            if "scene_flag.txt" in filenames:
+            if "scene_flag.txt" in filenames and os.path.basename(dirpath) == stem:
                 found.append(os.path.join(dirpath, "scene_flag.txt"))
     if found:
         found.sort(key=lambda p: os.path.getmtime(p), reverse=True)
         return found[0]
-    return os.path.join(base, "scene_mute", "scene_flag.txt")
+    return os.path.join(base, stem, "scene_flag.txt")
 
 def wav_info(path):
     try:
@@ -1058,6 +1104,7 @@ class TanteiTerminal:
         self.proc = None
         self.lua_watch = None
         self.lua_stop = None
+        self._char_proc = None
         self._lua_gone_why = None
         self._stop_reason = None
         self.lock = threading.Lock()
@@ -1106,6 +1153,7 @@ class TanteiTerminal:
         self._auto_detect()
         self._remember_paths()
         self._apply_language()
+        self.root.after(400, self._first_run_check)
 
     def _apply_icon(self):
         imgs, note = load_logo_images(self.root)
@@ -1234,7 +1282,7 @@ class TanteiTerminal:
             text = tr("btn.step1")
         try:
             self.btn_main.config(text=text, width=self._btn_w())
-            self.btn_delete_save.config(width=self._btn_w())
+            self.btn_char.config(width=self._btn_w())
         except TclError:
             pass
 
@@ -1345,11 +1393,10 @@ class TanteiTerminal:
                                font=self.f_body, command=self.select_mesen)
         self.btn_main.pack(pady=p8)
 
-        self.btn_delete_save = self._reg(Button(self.root, width=self._btn_w(), height=1,
-                                                state="disabled", fg="#c0392b",
-                                                font=self.f_body, command=self.delete_save),
-                                         "btn.delete_save")
-        self.btn_delete_save.pack(pady=(0, p4))
+        self.btn_char = self._reg(Button(self.root, width=self._btn_w(), height=1,
+                                         font=self.f_body, command=self.char_guide),
+                                  "btn.char")
+        self.btn_char.pack(pady=(0, p4))
 
         self.chk_monitor = self._reg(Checkbutton(self.root, variable=self.show_monitor,
                                                  font=self.f_small,
@@ -1575,7 +1622,8 @@ class TanteiTerminal:
     def _use_mesen(self, path, silent=False):
         self.mesen_path = path
         self.mesen_dir = os.path.dirname(os.path.abspath(path))
-        self.btn_delete_save.config(state="normal")
+        if not silent:
+            self._log_save_state()
         self._refresh_env_line()
         if not os.path.exists(self.bios_path) and not self._handle_missing_bios():
             self._refresh_env_line()
@@ -1777,6 +1825,15 @@ class TanteiTerminal:
         if not self.mesen_path or not os.path.exists(self.mesen_path):
             messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.mesen_missing"))
             return
+        # 终端自带 / 依赖的文件缺一个都不许开播：缺了不会有任何报错，只会静默失效
+        if not os.path.isfile(lua_path()):
+            self._log(tr("log.error", e=tr("dlg.bs_lua_missing")))
+            messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.bs_lua_missing"))
+            return
+        if not os.path.isfile(os.path.join(self.mesen_dir, "settings.json")):
+            self._log(tr("log.error", e=tr("dlg.settings_missing")))
+            messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.settings_missing"))
+            return
         if not self.chapter:
             messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.chapter_missing"))
             return
@@ -1792,6 +1849,10 @@ class TanteiTerminal:
                 messagebox.showerror(tr("dlg.files_missing"),
                                      tr("dlg.file_missing_msg", name=name, p=p))
                 return
+
+        # 没有人物存档就不许开播：广播音频不会等首次建人物，整段会错位
+        if not self._ensure_char():
+            return
 
         try:
             offset_ms = int(self.offset_var.get() or 0)
@@ -1953,8 +2014,6 @@ class TanteiTerminal:
                     except OSError:
                         pass
                 patch_settings(settings_path, log=self._log)
-            else:
-                self._log(tr("log.cfg_missing"))
 
             sat = os.path.join(self.mesen_dir, "Satellaview")
             n_del = clear_dir(sat)
@@ -1969,8 +2028,6 @@ class TanteiTerminal:
                 if os.path.exists(cand):
                     lua = cand
                     cmd.append(lua)
-                else:
-                    self._log(tr("log.lua_missing", name=os.path.basename(cand)))
             self._log(tr("log.launch", exe=os.path.basename(self.mesen_path),
                          lua=tr("log.launch_lua", name=os.path.basename(lua)) if lua
                          else tr("log.launch_nolua")))
@@ -2009,12 +2066,6 @@ class TanteiTerminal:
                 self._set_state(clock=(start_sim + timedelta(seconds=el)).strftime("%H:%M:%S"))
                 time.sleep(0.1)
             self._set_state(clock="18:00:00")
-            if self.lua_stop is not None and self.lua_stop.dir is None:
-                self._log(tr("log.no_closed_marker",
-                             dirs=repr(self.lua_stop._candidates()[:5])))
-            if self.lua_watch is not None and not self.lua_watch.seen:
-                self._log(tr("log.no_script_window",
-                             titles=repr(LuaWindowWatcher._enum_titles(proc.pid) or [])))
 
             ok, skipped = copy_dir(chap_dir, sat)
             self._log(tr("log.chapter_pushed", ok=ok,
@@ -2067,17 +2118,13 @@ class TanteiTerminal:
         mute_state, mute_target, mute_start = "IDLE", None, 0.0
         last_unmute = None
         last_seq = None
-        warned_missing = False
         rescan_tick = 0
         if mute_on:
-            self._log(tr("log.flag_file", path=rel(flag_file, ROOT)))
+            # bs.lua 由开播硬闸保证存在；标记文件要等玩家进场景才写，晚到属正常，不告警
             self._log(tr("log.exits",
                          a=" / ".join(fmt_mmss(e[0]) for e in exits),
                          b=" / ".join(fmt_mmss(e[0] + offset) for e in exits),
                          ms=f"{offset * 1000:+.0f}"))
-            if not os.path.exists(flag_file):
-                self._log(tr("log.flag_missing"))
-                warned_missing = True
 
         t_play = time.time()
         last_sample = 0.0
@@ -2124,9 +2171,6 @@ class TanteiTerminal:
                 if mute_on:
                     seq = read_seq(flag_file)
                     if seq is not None:
-                        if warned_missing:
-                            warned_missing = False
-                            self._log(tr("log.marker_found"))
                         if last_seq is None:
                             last_seq = seq
                         elif seq != last_seq:
@@ -2155,7 +2199,6 @@ class TanteiTerminal:
                             nf = resolve_flag_file(None, self.mesen_dir)
                             if nf != flag_file and os.path.exists(nf):
                                 flag_file = nf
-                                self._log(tr("log.rescan", path=rel(nf, ROOT)))
 
                     if mute_state == "MUTED" and mute_target is not None and content >= mute_target:
                         held = time.time() - mute_start
@@ -2260,6 +2303,179 @@ class TanteiTerminal:
         self._refresh_env_line()
         self.root.after(400, lambda: self.btn_main.config(state="normal"))
 
+    # ---------- 人物存档 / 首次使用引导 ----------
+    def _save_file(self):
+        """BS-X 人物存档的绝对路径（Mesen 的 Saves 目录）。"""
+        return os.path.join(self.mesen_dir or ROOT, "Saves", "BsxBios.srm")
+
+    def _has_char(self):
+        """srm 是否存在。
+
+        🔴 这不是「人物建好了」的判据：Mesen 每次退出都会把 32KB SRAM 原样
+        写成这个文件，哪怕你只进到输姓名那一步就关掉（实测 2026-11-24）。
+        所以它只能判「BIOS 跑过」，不能判「人物建好了」。
+        """
+        return os.path.exists(self._save_file())
+
+    # 🔴 人物记录的实测布局（2026-11-24 由「空白基线」与「建好人物」两份
+    # 32 KB srm 逐字节 diff 定出，样本见 `_generated/save_samples/`）：
+    #   0x0000  2 字节魔数 "SG"
+    #   0x0002  u16 校验和；0x0004 是它的反码（两数相加恒为 0xFFFF）
+    #   0x0006  姓名：10 字节 = 最多 5 个全角字，SJIS，未用完补 0x00
+    #   0x3000  起是同一份记录的逐字节副本（同样有 "SG" 头 + 姓名）
+    # 空白（只启 BIOS、在输姓名界面就关窗）：姓名 10 字节全 0x00。
+    # 建好之后：姓名区变成 SJIS 名字（本次实测为 82 A0 ×5 =「あああああ」）。
+    CHAR_SIG = b"SG"
+    CHAR_NAME_OFF = 0x0006
+    CHAR_NAME_END = 0x0010
+
+    def _probe_char(self, data):
+        """从 srm 内容判定「有没有人物」。
+
+        True = 有角色 / False = 没角色（长度不够、魔数不对这类「不像我们的存档」
+        一律算没角色 —— 判据不认识时不放行）。
+        """
+        if len(data) < self.CHAR_NAME_END:
+            return False
+        if data[0:len(self.CHAR_SIG)] != self.CHAR_SIG:
+            return False
+        name = data[self.CHAR_NAME_OFF:self.CHAR_NAME_END]
+        # 全 0x00（BIOS 初始化过、没建人物）或全 0xFF（空闪存）都算没有
+        return any(v not in (0x00, 0xFF) for v in name)
+
+    def _char_state(self):
+        """none = 没有 srm；nochar = 有 srm 但里面没有人物（含读不出 / 格式不认识）；
+        haschar = 内容判定有角色。"""
+        p = self._save_file()
+        if not os.path.exists(p):
+            return "none"
+        try:
+            with open(p, "rb") as f:
+                data = f.read()
+        except OSError:
+            return "nochar"
+        return "haschar" if self._probe_char(data) else "nochar"
+
+    def _log_save_state(self):
+        p = self._save_file()
+        st = self._char_state()
+        log = {
+            "none": "log.save_missing",
+            "nochar": "log.save_nochar",
+            "haschar": "log.save_ok",
+        }[st]
+        self._log(tr(log, path=rel(p, ROOT)))
+
+    def _first_run_check(self):
+        """每次启动都检测：没有文件 / 文件里没人物 → 引导创建；有角色只记日志。"""
+        if self.selftest:
+            return
+        self._log_save_state()
+        if not self.mesen_path:
+            return
+        st = self._char_state()
+        if st == "none":
+            if messagebox.askyesno(tr("dlg.save_title"),
+                                   tr("dlg.save_missing_msg", p=self._save_file())):
+                self._launch_char_creation()
+        elif st == "nochar":
+            if messagebox.askyesno(tr("dlg.save_title"),
+                                   tr("dlg.save_nochar_msg", p=self._save_file())):
+                self._launch_char_creation()
+
+    def char_guide(self):
+        """「人物存档：创建 / 检查」按钮：需要创建就引导，否则只报状态与路径。"""
+        if self.running:
+            messagebox.showinfo(tr("dlg.notice"), tr("dlg.save_busy"))
+            return
+        st = self._char_state()
+        self._log_save_state()
+        if st == "haschar":
+            messagebox.showinfo(tr("dlg.save_title"),
+                                tr("dlg.save_found_msg", p=self._save_file()))
+            return
+        key = "dlg.save_nochar_msg" if st == "nochar" else "dlg.save_missing_msg"
+        if messagebox.askyesno(tr("dlg.save_title"), tr(key, p=self._save_file())):
+            self._launch_char_creation()
+
+    def _ensure_char(self):
+        """开播前的硬闸：没有 srm、或 srm 里没有人物 → 不许开播。"""
+        st = self._char_state()
+        if st == "haschar":
+            return True
+        self._log_save_state()
+        key = "dlg.save_nochar_blocked" if st == "nochar" else "dlg.save_blocked"
+        if messagebox.askyesno(tr("dlg.save_title"), tr(key, p=self._save_file())):
+            self._launch_char_creation()
+        return False
+
+    def _launch_char_creation(self):
+        """打开 BS-X 广场建人物：不推送广播数据、不播放音频，只启动 Mesen。"""
+        proc = getattr(self, "_char_proc", None)
+        if proc is not None and proc.poll() is None:
+            messagebox.showinfo(tr("dlg.notice"), tr("dlg.save_busy"))
+            return
+        if self.running:
+            messagebox.showinfo(tr("dlg.notice"), tr("dlg.save_busy"))
+            return
+        if not self.mesen_path or not os.path.exists(self.mesen_path):
+            messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.mesen_missing"))
+            return
+        if not os.path.exists(self.bios_path):
+            messagebox.showerror(tr("dlg.bios_check"), tr("dlg.bios_check_msg"))
+            return
+        if self._mesen_running():
+            messagebox.showwarning(tr("dlg.notice"), tr("dlg.save_busy"))
+            return
+
+        sat = os.path.join(self.mesen_dir, "Satellaview")
+        try:
+            n_del = clear_dir(sat)
+        except OSError:
+            n_del = 0
+        plaza = rp("bstantei", "0")
+        ok, skipped = copy_dir(plaza, sat) if os.path.isdir(plaza) else (0, 0)
+        self._log(tr("log.sat_cleared", n=n_del, ok=ok,
+                     skipped=tr("log.skipped", n=skipped) if skipped else ""))
+
+        try:
+            proc = subprocess.Popen([self.mesen_path, self.bios_path], cwd=self.mesen_dir)
+        except OSError as e:
+            self._log(tr("log.error", e=repr(e)))
+            messagebox.showerror(tr("dlg.error"), tr("dlg.char_launch_fail", e=e))
+            return
+        self._char_proc = proc
+        self._status("status.char_prepare")
+        self._log(tr("log.char_launch", exe=os.path.basename(self.mesen_path)))
+        threading.Thread(target=self._wait_char_done, args=(proc,), daemon=True).start()
+
+    def _wait_char_done(self, proc):
+        """等玩家在广场里建完人物、关掉 Mesen，再看 srm 内容。"""
+        try:
+            proc.wait()
+        except Exception:
+            pass
+        self._char_proc = None
+        ok = self._char_state() == "haschar"
+        self._log(tr("log.char_done",
+                     state=tr("log.char.state_ok" if ok else "log.char.state_no")))
+        try:
+            self.root.after(0, self._after_char_creation)
+        except (TclError, RuntimeError):
+            pass
+
+    def _after_char_creation(self):
+        p = self._save_file()
+        st = self._char_state()
+        self._log_save_state()
+        if st == "haschar":
+            self._status("status.char_ready")
+            messagebox.showinfo(tr("dlg.save_title"), tr("dlg.save_ready", p=p))
+            return
+        if self.mesen_path and not self.chapter:
+            self._status("status.pick_chapter")
+        messagebox.showwarning(tr("dlg.save_title"), tr("dlg.save_pending", p=p))
+
     def _mesen_running(self):
         """Mesen 是否还开着：先看本终端启动的进程，再枚举同名进程核对目录。"""
         proc = getattr(self, "proc", None)
@@ -2278,24 +2494,6 @@ class TanteiTerminal:
             if os.path.normcase(os.path.dirname(os.path.abspath(exe))) == want:
                 return True
         return False
-
-    def delete_save(self):
-        srm = os.path.join(self.mesen_dir or ROOT, "Saves", "BsxBios.srm")
-        if self._mesen_running():
-            self._log(tr("log.save_del_blocked"))
-            messagebox.showwarning(tr("dlg.notice"), tr("dlg.save_del_running"))
-            return
-        if not messagebox.askyesno(tr("dlg.del_save"), tr("dlg.del_save_msg")):
-            return
-        if not os.path.exists(srm):
-            messagebox.showinfo(tr("dlg.notice"), tr("dlg.save_not_found"))
-            return
-        try:
-            os.remove(srm)
-            self._log(tr("log.save_deleted", path=rel(srm, ROOT)))
-            messagebox.showinfo(tr("dlg.ok"), tr("dlg.save_deleted"))
-        except OSError as e:
-            messagebox.showerror(tr("dlg.error"), tr("dlg.save_del_fail", e=e))
 
     def _tick(self):
         try:
