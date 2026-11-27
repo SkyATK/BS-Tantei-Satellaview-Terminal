@@ -32,8 +32,8 @@ LANG_DEFAULT = "zh"
 LANG_CODES = ("zh", "en")
 LANG_LABELS = {"zh": "简体中文", "en": "English"}
 _TEXTS = {
-    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.02",
-                  "en": "Satellaview Terminal · BS Tantei Club 1.02"},
+    "app.title": {"zh": "Satellaview Terminal · BS 侦探俱乐部 1.03",
+                  "en": "Satellaview Terminal · BS Tantei Club 1.03"},
     "ui.clock_title": {"zh": "虚拟广播时钟", "en": "Virtual broadcast clock"},
     "ui.chapter_label": {"zh": "推送篇章：", "en": "Chapter to push:"},
     "ui.monitor_toggle": {"zh": "显示监视面板 / 高级设置", "en": "Show monitor panel / advanced settings"},
@@ -141,9 +141,11 @@ _TEXTS = {
     "dlg.bs_lua_missing": {"zh": "终端必要文件bs.lua缺失，请重新检查！",
                            "en": "Required terminal file bs.lua is missing, please check "
                                  "again!"},
-    "dlg.settings_missing": {"zh": "Mesen配置文件settings.json缺失，请重新检查！",
-                             "en": "Mesen settings file settings.json is missing, please "
-                                   "check again!"},
+    "dlg.settings_missing": {"zh": "检测到Mesen模拟器数据没有保存至当前目录或设置错误，"
+                                   "使用本软件前必须正确设置Mesen数据的保存路径，请重新检查。",
+                             "en": "Mesen save data is not being stored in the current folder, or "
+                                   "the path is set wrong. The Mesen save data folder must be set "
+                                   "correctly before using this program. Please check again."},
     "dlg.mesen_missing": {"zh": "未找到Mesen.exe，请重新选择。",
                           "en": "Mesen.exe not found, please pick it again."},
     "dlg.chapter_missing": {"zh": "请先选择篇章。", "en": "Choose a chapter first."},
@@ -1153,7 +1155,7 @@ class TanteiTerminal:
         self._auto_detect()
         self._remember_paths()
         self._apply_language()
-        self.root.after(400, self._first_run_check)
+        self.root.after(400, self._startup_check)
 
     def _apply_icon(self):
         imgs, note = load_logo_images(self.root)
@@ -1823,6 +1825,7 @@ class TanteiTerminal:
         if self.running:
             return
         if not self.mesen_path or not os.path.exists(self.mesen_path):
+            self._log(tr("log.error", e=tr("dlg.mesen_missing")))
             messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.mesen_missing"))
             return
         # 终端自带 / 依赖的文件缺一个都不许开播：缺了不会有任何报错，只会静默失效
@@ -1830,7 +1833,8 @@ class TanteiTerminal:
             self._log(tr("log.error", e=tr("dlg.bs_lua_missing")))
             messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.bs_lua_missing"))
             return
-        if not os.path.isfile(os.path.join(self.mesen_dir, "settings.json")):
+        # Mesen 数据不在本目录（或路径设错）时，后面的补丁、目录、存档位置全是错的
+        if not self._settings_ok():
             self._log(tr("log.error", e=tr("dlg.settings_missing")))
             messagebox.showerror(tr("dlg.cannot_start"), tr("dlg.settings_missing"))
             return
@@ -2366,6 +2370,30 @@ class TanteiTerminal:
         }[st]
         self._log(tr(log, path=rel(p, ROOT)))
 
+    def _settings_ok(self):
+        """settings.json 必须和 Mesen.exe 同目录（便携模式）。
+
+        没有它：BS-X 时钟补丁、脚本自动加载都打不上，Satellaview/Saves 也会落到别的目录，
+        表现为开播后游戏时间不对、静音脚本没跑，所以缺了直接拒绝往下走。
+        """
+        return os.path.isfile(os.path.join(self.mesen_dir or ROOT, "settings.json"))
+
+    def _startup_check(self):
+        """开机检查：Mesen.exe 都没定位到时一律不弹，等用户自己指定。
+
+        指定之前连 settings.json 都无从判断（它就在 Mesen.exe 同目录），人物存档也不知道去哪找，
+        所以这里不做任何提示。定位到 Mesen.exe 之后才依次查 settings.json → 人物存档。
+        """
+        if self.selftest:
+            return
+        if not self.mesen_path or not os.path.exists(self.mesen_path):
+            return
+        if not self._settings_ok():
+            self._log(tr("log.error", e=tr("dlg.settings_missing")))
+            messagebox.showerror(tr("dlg.notice"), tr("dlg.settings_missing"))
+            return
+        self._first_run_check()
+
     def _first_run_check(self):
         """每次启动都检测：没有文件 / 文件里没人物 → 引导创建；有角色只记日志。"""
         if self.selftest:
@@ -2387,6 +2415,11 @@ class TanteiTerminal:
         """「人物存档：创建 / 检查」按钮：需要创建就引导，否则只报状态与路径。"""
         if self.running:
             messagebox.showinfo(tr("dlg.notice"), tr("dlg.save_busy"))
+            return
+        # settings.json 缺了，Saves 根本不在这个目录：查到的状态、写进去的存档全是错的
+        if not self._settings_ok():
+            self._log(tr("log.error", e=tr("dlg.settings_missing")))
+            messagebox.showerror(tr("dlg.notice"), tr("dlg.settings_missing"))
             return
         st = self._char_state()
         self._log_save_state()
