@@ -40,6 +40,7 @@ This project is based on [BS-Zelda-Satellaview-Terminal](https://github.com/kiri
 4. **Notes**:
    * **Do not use directories containing Chinese characters.**
    * Do not close or modify the Lua script while it is running.
+   * While playing, do not use the emulator's save states, load states, fast-forward, or any other feature unrelated to the game and the broadcast terminal itself.
 
 ## License
 
